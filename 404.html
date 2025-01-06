@@ -1,0 +1,11 @@
+<!-- 404.html -->
+<script type="text/javascript">
+  // Get the path from the current URL
+  var path = window.location.pathname;
+
+  // Check if the path does not start with the base URL and is not just '/'
+  if (path !== "/" && !path.startsWith("/FlashStudy_FrontEnd")) {
+    // Redirect to the base URL of your app
+    window.location.replace("/FlashStudy_FrontEnd/");
+  }
+</script>
