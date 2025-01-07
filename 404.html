@@ -1,11 +1,18 @@
 <!-- 404.html -->
-<script type="text/javascript">
-  // Get the path from the current URL
-  var path = window.location.pathname;
+<script>
+  // Redirect to index.html for SPA routing
+  (function () {
+    const redirectPath = window.location.pathname.replace(
+      "/FlashStudy_FrontEnd",
+      ""
+    );
+    if (!redirectPath || redirectPath === "/") return;
 
-  // Check if the path does not start with the base URL and is not just '/'
-  if (path !== "/" && !path.startsWith("/FlashStudy_FrontEnd")) {
-    // Redirect to the base URL of your app
-    window.location.replace("/FlashStudy_FrontEnd/");
-  }
+    const redirectUrl = window.location.origin + "/FlashStudy_FrontEnd/";
+    const targetUrl = redirectUrl + "#" + redirectPath;
+
+    if (!window.location.hash) {
+      window.location.href = targetUrl;
+    }
+  })();
 </script>
