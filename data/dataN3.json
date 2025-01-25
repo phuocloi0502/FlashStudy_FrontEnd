@@ -2,7 +2,7 @@
   {
     "chapter_number": 1,
     "chapter_name": "Quan hệ giữa người với người",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 87,
@@ -1184,7 +1184,7 @@
   {
     "chapter_number": 2,
     "chapter_name": "Cuộc sống hàng ngày 1",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 92,
@@ -2496,7 +2496,7 @@
   {
     "chapter_number": 3,
     "chapter_name": "Cuộc sống hàng ngày 2",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 97,
@@ -3738,7 +3738,7 @@
   {
     "chapter_number": 4,
     "chapter_name": "Thành phố của chúng tôi",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 102,
@@ -5100,7 +5100,7 @@
   {
     "chapter_number": 5,
     "chapter_name": "Học nào",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 107,
@@ -6472,7 +6472,7 @@
   {
     "chapter_number": 6,
     "chapter_name": "Công việc",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 112,
@@ -7694,7 +7694,7 @@
   {
     "chapter_number": 7,
     "chapter_name": "Những điều vui",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 117,
@@ -8976,7 +8976,7 @@
   {
     "chapter_number": 8,
     "chapter_name": "Vì sức khỏe",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 122,
@@ -10048,7 +10048,7 @@
   {
     "chapter_number": 9,
     "chapter_name": "Tự nhiên và cuộc sống",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 127,
@@ -11090,7 +11090,7 @@
   {
     "chapter_number": 10,
     "chapter_name": "Hãy học trên bản tin thời sự !",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 132,
@@ -12192,7 +12192,7 @@
   {
     "chapter_number": 11,
     "chapter_name": "Hãy truyền đạt cảm xúc của mình",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 137,
@@ -13324,7 +13324,7 @@
   {
     "chapter_number": 12,
     "chapter_name": "Hãy truyền đạt ấn tượng của mình",
-    "level_id": 3,
+    "level_id": "N3",
     "lessonList": [
       {
         "lesson_id": 142,
