@@ -8,3 +8,9 @@
     padding: 20px 30px;
   }
 }
+@media (max-width: 768px) {
+  .container .content-wrap {
+    top: 60px !important;
+    padding: 10px !important;
+  }
+}

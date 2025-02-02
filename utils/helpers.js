@@ -1,9 +1,9 @@
-// import { jwtDecode } from "jwt-decode";
+import { to } from "react-spring";
 
-// export const getToken = () => {
-//   const token = localStorage.getItem("token");
-//   return token;
-// };
+export const getToken = () => {
+  const token = localStorage.getItem("token");
+  return token;
+};
 // export const getTokenDecode = () => {
 //   const token = getToken();
 
@@ -15,11 +15,12 @@
 //     return null;
 //   }
 // };
-// export const isLogged = () => {
-//   const token = getTokenDecode();
-//   try {
-//     return token?.data?.rules == "ADMIN" || token?.data?.rules == "MANAGER";
-//   } catch (error) {
-//     return false;
-//   }
-// };
+export const isLogged = () => {
+  const token = getToken();
+
+  if (token == null) {
+    return false;
+  } else {
+    return true;
+  }
+};

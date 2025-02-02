@@ -1,0 +1,64 @@
+@use "../../styles/color" as *;
+.chapter-item {
+  .chapter-title {
+    margin-top: 20px;
+    span {
+      color: #e83e8c;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-right: 20px;
+    }
+    strong {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: $text-color;
+    }
+  }
+}
+.session-wrap {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 15px;
+  .session-item {
+    .session-current {
+      color: #434444 !important;
+    }
+    span {
+      background-color: #6c757d;
+      padding: 5px;
+      color: #fff;
+      font-weight: 400;
+      font-size: 0.8rem;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    strong {
+      color: #17a2b8 !important;
+      font-size: 1.1rem;
+      font-weight: 400;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+.chapter-wrap {
+  .chapter-content {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    .chapter-column {
+      flex: 1;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .chapter-content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

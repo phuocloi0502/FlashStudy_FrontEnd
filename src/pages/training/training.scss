@@ -1,0 +1,87 @@
+@use "../../styles/color" as *;
+.ant-row {
+  margin-top: 10px !important;
+}
+.training-content-wrap {
+  display: flex;
+  gap: 30px;
+  .training-content-header {
+    flex: 3;
+    .option-area {
+      display: flex;
+
+      .show-model-button {
+        flex: 1;
+        svg {
+          font-size: 1.3rem;
+        }
+      }
+      .status-vocabulary {
+        flex: 1;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          padding: 4px 6px;
+          border-radius: 8px;
+          color: whitesmoke;
+        }
+      }
+      .status-blue {
+        span {
+          background-color: $main-blue;
+        }
+      }
+      .status-red {
+        span {
+          background-color: rgba(255, 0, 0, 0.5);
+        }
+      }
+      .status-green {
+        span {
+          background-color: rgb(37, 128, 37);
+        }
+      }
+      .count-vocabulary {
+        flex: 1;
+        text-align: center;
+        display: flex;
+        justify-content: end;
+        margin-right: 20px;
+        span {
+          font-size: 1.3rem;
+        }
+      }
+    }
+
+    .flash-card-area {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      //  background-color: red;
+      h2 {
+        margin-top: 40px;
+        font-weight: 500;
+        color: rgb(91, 88, 88);
+      }
+    }
+  }
+  .muc-luc-area {
+    flex: 1;
+  }
+}
+@media (max-width: 768px) {
+  .training-title {
+    h3 {
+      font-size: 1.2rem !important;
+    }
+  }
+  .training-content-wrap {
+    //margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

@@ -1,5 +1,5 @@
-import { Navigate } from "react-router-dom";
-import { getToken } from "../utils/helpers";
+import { Navigate, Outlet } from "react-router-dom";
+import { getToken } from "../../utils/helpers";
 
 const AuthLayout = ({ children, isPublic }) => {
   const token = getToken();
@@ -11,7 +11,7 @@ const AuthLayout = ({ children, isPublic }) => {
   if (!isPublic && !token) {
     return <Navigate to="/login" replace />;
   }
-  return children;
+  return <Outlet />;
 };
 
 export default AuthLayout;

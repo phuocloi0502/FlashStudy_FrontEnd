@@ -1,13 +1,103 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./header.scss";
 import logoWeb from "../../assets/logo_web.png";
+import { Drawer, Menu } from "antd";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { IoMenu } from "react-icons/io5";
+import { TbVocabulary } from "react-icons/tb";
+import { FaBook } from "react-icons/fa";
+import { AiTwotoneInsurance } from "react-icons/ai";
+import { FaBlog } from "react-icons/fa";
+import { RiAccountCircleFill } from "react-icons/ri";
+import { MdLogout } from "react-icons/md";
+import { MdOutlineLogin } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsLogged } from "../../redux/slide/MyState";
+import { isLogged } from "../../../utils/helpers";
 export const Header = (props) => {
+  const nav = useNavigate();
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+  const items = [
+    {
+      key: "/",
+      label: "Home",
+      icon: <FaHome />,
+    },
+    {
+      key: "tu-vung",
+      label: "Từ vựng",
+      icon: <TbVocabulary />,
+    },
+    {
+      key: "ngu-phap",
+      label: "Ngữ pháp",
+      icon: <FaBook />,
+    },
+    {
+      key: "kanji",
+      label: "Kanji",
+      icon: <AiTwotoneInsurance />,
+    },
+    {
+      key: "blog",
+      label: "Blog",
+      icon: <FaBlog />,
+    },
+    {
+      key: "account",
+      label: "Tài khoản",
+      icon: <RiAccountCircleFill />,
+    },
+  ];
+  const onClick = (e) => {
+    nav(e.key);
+    setOpen(false);
+  };
+  const dispatch = useDispatch();
+  //const isLogged = useSelector((state) => state.MyState.isLogged);
+  const handleLogOut = () => {
+    nav("/login");
+    localStorage.removeItem("token");
+    localStorage.removeItem("UID");
+  };
+  useEffect(() => {}, [isLogged]);
   return (
     <div className="header-area">
-      <div className="logo-web-area">
+      <Drawer
+        onClose={onClose}
+        open={open}
+        placement="left"
+        width={180}
+        maskClosable={true}
+      >
+        <Menu
+          onClick={onClick}
+          style={{
+            width: 220,
+          }}
+          defaultOpenKeys={["home"]}
+          // selectedKeys={[current]}
+          mode="inline"
+          items={items}
+        />
+      </Drawer>
+      <div className="mobile-menu-wrap" onClick={showDrawer}>
+        <IoMenu />
+      </div>
+      <div
+        className="logo-web-area"
+        onClick={() => {
+          nav("/");
+        }}
+      >
         <img src={logoWeb} alt="" />
         <div className="logo-text"> Flash Study</div>
       </div>
@@ -22,10 +112,10 @@ export const Header = (props) => {
           </Link>
         </div>
         <div className="menu-item">
-          <Link to={"/tuvung"}>Từ Vựng</Link>
+          <Link to={"/tu-vung"}>Từ Vựng</Link>
         </div>
         <div className="menu-item">
-          <Link to={"/nguphap"}>Ngữ Pháp</Link>
+          <Link to={"/ngu-phap"}>Ngữ Pháp</Link>
         </div>
         <div className="menu-item">
           {" "}
@@ -40,7 +130,33 @@ export const Header = (props) => {
             <FaUser />
           </Link>
         </div>
-        <div className="menu-item sign-button">Sign up</div>
+        <div className="menu-item sign-button">
+          {" "}
+          {isLogged() ? (
+            <>
+              <Link onClick={() => handleLogOut()} to={"/login"}>
+                Log out
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to={"/login"}>Log in</Link>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="log-out-wrap">
+        {isLogged() ? (
+          <>
+            <Link onClick={() => handleLogOut()} to={"/login"}>
+              Log out
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to={"/login"}>Log in</Link>
+          </>
+        )}
       </div>
     </div>
   );

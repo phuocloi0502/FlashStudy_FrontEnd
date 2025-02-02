@@ -1,0 +1,64 @@
+@use "../../styles/color" as *;
+
+.home-page-wrap {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  .home-page-title {
+    text-align: center;
+    line-height: 50px;
+    h3 {
+      color: $xanh_dam;
+      font-size: xx-large;
+    }
+    h4 {
+      color: $do_dam;
+      font-size: x-large;
+    }
+  }
+  .home-page-content {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+    .box-wrap {
+      flex: 7;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      background-color: rgba(240, 248, 255, 0.717);
+      .box-icon {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        > span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 12px;
+          border-radius: 8px;
+          color: white;
+          font-size: 3rem;
+        }
+        .box-content {
+          color: $text-color;
+        }
+      }
+      .box-title {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page-wrap {
+    padding: 10px 20px;
+  }
+  .home-page-content {
+    display: flex;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+}

@@ -1,25 +1,35 @@
 @use "../../styles/_color.scss" as *;
+.ant-drawer-header {
+  display: none !important;
+}
+.ant-drawer-content {
+  width: 256px !important;
+}
 .header-area {
   height: 70px;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   position: fixed;
+  z-index: 99;
   background-color: $main-blue;
   color: rgb(251, 251, 251);
   font-size: 1.1rem;
-
-  justify-content: space-between;
-  align-items: center;
   padding: 0 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  .mobile-menu-wrap {
+    display: none;
+    flex: 1;
+    svg {
+      font-size: 2rem;
+    }
+  }
   .logo-web-area {
-    height: 100%;
+    height: auto;
     padding: 0 20px;
     display: flex;
     align-items: center;
     font-weight: bold;
-    color: #ff1a1a;
+    color: #213672;
     background-color: white;
     font-size: 1.3rem;
     img {
@@ -32,8 +42,9 @@
   }
 }
 .main-menu {
+  flex: 8;
   display: flex;
-  flex: 2;
+  align-items: center;
   justify-content: left;
   .menu-item {
     padding: 20px;
@@ -49,6 +60,15 @@
 
   .sign-button {
     text-decoration: underline;
+  }
+}
+.log-out-wrap {
+  flex: 1;
+  display: none;
+  justify-content: right;
+  align-items: center;
+  svg {
+    font-size: 2rem;
   }
 }
 
@@ -71,44 +91,39 @@
 }
 
 @media (max-width: 768px) {
-  .header-area {
-    height: auto;
-    flex-direction: column;
+  .mobile-menu-wrap {
+    display: flex !important;
+    justify-content: left;
     align-items: center;
-    padding: 0 !important;
+  }
+  .header-area {
+    height: 60px;
+
     .logo-web-area {
-      order: 1;
       border-radius: 5px;
       margin-top: 5px;
       display: flex;
       justify-content: center;
-      padding: 0 !important;
-      font-size: 1.1rem;
+      align-items: center;
+      font-size: 1.5rem;
+      color: #213672;
+      background-color: transparent !important;
       img {
         width: 30px;
         height: 30px;
       }
     }
-
-    .main-menu {
-      order: 2;
-      width: 100%;
-      justify-content: center;
-      gap: 15px;
-      .menu-item {
-        padding: 5px 2px;
-        span {
-          font-size: 1rem;
-        }
-        font-size: 0.9rem;
-      }
-    }
-
-    .user-area {
-      order: 3;
-      width: 100%;
-      justify-content: center;
-      margin: 10px 0;
+  }
+  .main-menu {
+    display: none;
+  }
+  .log-out-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    a {
+      font-size: 0.9rem;
     }
   }
 }

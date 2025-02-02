@@ -1,0 +1,19 @@
+<!-- 404.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+      // Redirect to index.html for SPA routing
+      const redirectUrl = window.location.origin + "/FlashStudy_FrontEnd/";
+      const targetUrl =
+        redirectUrl +
+        "#" +
+        window.location.pathname.replace("/FlashStudy_FrontEnd", "");
+      window.location.href = targetUrl;
+    </script>
+  </head>
+  <body></body>
+</html>

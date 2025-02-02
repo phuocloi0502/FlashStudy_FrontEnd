@@ -1,0 +1,96 @@
+@use "../../styles/color" as *;
+.vocabulary-list-wrap {
+  .vocabulary-list-content-wrap {
+    margin-top: 20px;
+    display: flex;
+    gap: 30px;
+    .vocabulary-list {
+      flex: 3;
+    }
+    .muc-luc-area {
+      flex: 1;
+    }
+  }
+  .muc-luc-area {
+    h2 {
+      color: rgb(84, 83, 83);
+    }
+    hr {
+      margin-top: 20px;
+    }
+  }
+}
+.table-index-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.play-icon {
+  color: rgb(66, 130, 249);
+  background-color: rgba(221, 213, 213, 0.534);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    border: 1px solid rgb(66, 130, 249);
+  }
+}
+.vocabulary-item {
+  .kanji-area {
+    color: rgb(239, 61, 61);
+    font-size: 1.2rem;
+  }
+  .furigana-area {
+    font-weight: 400;
+  }
+  .example-mean-area {
+    font-size: 1.2rem;
+    margin-top: 5px;
+  }
+  ruby {
+    ruby-position: over; /* Đặt Hiragana bên trên Kanji */
+    letter-spacing: 0.2rem;
+  }
+  rt {
+    font-size: 0.6em; /* Giảm kích thước của Hiragana */
+    line-height: 1.9em; /* Điều chỉnh khoảng cách giữa Kanji và Hiragana */
+    letter-spacing: 0.1rem;
+  }
+  rb {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .vocabulary-list-title {
+    h3 {
+      font-size: 0.9rem !important;
+    }
+  }
+  .vocabulary-list-content-wrap {
+    //margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px !important;
+  }
+  .vocabulary-item .kanji-area {
+    font-size: 0.9rem;
+  }
+  .vocabulary-item .furigana-area {
+    font-size: 0.8rem;
+  }
+  .vocabulary-item .mean-area {
+    font-size: 0.8rem;
+  }
+  .vocabulary-item .example-mean-area {
+    font-size: 0.8rem;
+  }
+}
