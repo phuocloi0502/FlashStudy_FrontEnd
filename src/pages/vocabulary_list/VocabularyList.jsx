@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./vocabulary_list.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Space, Table, Button, Spin } from "antd";
-import { IoPlayCircleOutline } from "react-icons/io5";
+import { IoPlayCircleOutline, IoPauseCircleOutline } from "react-icons/io5";
 import { changeLessonIdCurrent } from "../../redux/slide/LessonSlide";
 import useSelection from "antd/es/table/hooks/useSelection";
 import { useDispatch, useSelector } from "react-redux";
 import { dataTable } from "../../../utils/constanst";
 import { fetchChapterList } from "../../redux/slide/chapterSlide";
+import ReactAudioPlayer from "react-audio-player";
 export const VocabularyList = (props) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -58,20 +59,64 @@ export const VocabularyList = (props) => {
     );
   };
 
+  // handle audio
+  const [playingIndex, setPlayingIndex] = useState(null); // File nào đang phát
+  const [isPlaying, setIsPlaying] = useState({}); // Trạng thái từng file
+  const audioRefs = useRef({}); // Ref từng audio
+
+  const togglePlay = (index, event) => {
+    if (audioRefs.current[index]) {
+      const audioElement = audioRefs.current[index].audioEl.current;
+
+      if (playingIndex === index) {
+        audioElement.pause();
+        setPlayingIndex(null);
+        setIsPlaying((prev) => ({ ...prev, [index]: false }));
+      } else {
+        if (playingIndex !== null && audioRefs.current[playingIndex]) {
+          const prevAudio = audioRefs.current[playingIndex].audioEl.current;
+          prevAudio.pause();
+          prevAudio.currentTime = 0;
+          setIsPlaying((prev) => ({ ...prev, [playingIndex]: false }));
+        }
+
+        audioElement.currentTime = 0;
+        audioElement.play();
+        setPlayingIndex(index);
+        setIsPlaying((prev) => ({ ...prev, [index]: true }));
+
+        audioElement.onended = () => {
+          setPlayingIndex(null);
+          setIsPlaying((prev) => ({ ...prev, [index]: false }));
+        };
+      }
+    }
+  };
+
   const columns = [
     {
       title: "#",
       dataIndex: "key",
       key: "id",
       responsive: ["lg"],
-      render: (text, record, index) => (
-        <div className="table-index-wrap">
-          {index + 1} <br />
-          <div className="play-icon">
-            <IoPlayCircleOutline />
+      render: (text, record, index) => {
+        return (
+          <div className="table-index-wrap">
+            {index + 1} <br />
+            <div className="play-icon" onClick={(e) => togglePlay(index, e)}>
+              {isPlaying[index] ? (
+                <IoPauseCircleOutline size={30} color="red" />
+              ) : (
+                <IoPlayCircleOutline size={30} color="black" />
+              )}
+              <ReactAudioPlayer
+                ref={(el) => (audioRefs.current[index] = el)}
+                src={record.sound_url}
+              />
+            </div>
           </div>
-        </div>
-      ),
+        );
+      },
     },
     {
       title: "Từ vựng",
@@ -115,10 +160,6 @@ export const VocabularyList = (props) => {
       },
     },
   ];
-  window.scrollTo({
-    top: 0, // Cuộn đến vị trí đầu trang
-    behavior: "smooth", // Tạo hiệu ứng cuộn mượt
-  });
 
   return (
     <div className="vocabulary-list-wrap">
@@ -151,7 +192,10 @@ export const VocabularyList = (props) => {
               columns={columns}
               dataSource={dataTable(listVocabulary)}
               pagination={false}
-              rowKey={(record) => record.key}
+              rowKey="key"
+              onRow={(record, rowIndex) => ({
+                onClick: () => togglePlay(rowIndex, record.sound_url),
+              })}
             />
           ) : (
             <></>
