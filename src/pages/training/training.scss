@@ -72,6 +72,17 @@
     flex: 1;
   }
 }
+.ant-tour-description {
+  position: relative !important;
+  padding: 15px 10px !important;
+  top: 15px;
+  font-size: 1.1rem;
+}
+.ant-tour-close {
+  z-index: 987 !important;
+  top: 10px !important;
+  margin-bottom: 10px;
+}
 @media (max-width: 768px) {
   .training-title {
     h3 {

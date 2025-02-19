@@ -23,20 +23,20 @@ export const Chapter = (props) => {
   const loading = useSelector((state) => state.chapterSlice.loading);
   useEffect(() => {
     dispatch(fetchChapterList(levelItem[vocabularyLevel]));
-  }, []);
+  }, [vocabularyLevel]);
 
   if (chapterList != null) {
     Object.values(chapterList).forEach((element) => {
       //  console.log(element);
     });
   }
-  console.log(loading);
+  // console.log(loading);
 
   const half = chapterList?.length ? Math.ceil(chapterList.length / 2) : 0; // Kiểm tra nếu chapterList có dữ liệu
   const leftColumn = chapterList?.slice(0, half);
   const rightColumn = chapterList?.slice(half);
 
-  console.log(chapterList);
+  // console.log(chapterList);
 
   const nav = useNavigate();
 

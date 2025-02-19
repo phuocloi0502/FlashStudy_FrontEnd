@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.scss";
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button, message, Spin } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineMailOutline, MdLockOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
@@ -41,6 +41,7 @@ export const Login = (props) => {
   };
   return (
     <div className="login-form-wrap">
+      <Spin spinning={loading} fullscreen={true} />
       <Form
         name="loginForm"
         onFinish={handleLogin}
@@ -93,7 +94,7 @@ export const Login = (props) => {
           />
         </Form.Item>
         <Form.Item className="login-form-item">
-          <Link>
+          <Link to={"forgot-password"}>
             <strong>Quên mật khẩu ?</strong>
           </Link>
           <br />
@@ -104,7 +105,11 @@ export const Login = (props) => {
             }}
           >
             {" "}
-            Chưa có tài khoản ? Đăng ký ngay
+            Chưa có tài khoản ?{" "}
+            <Button danger type="primary">
+              {" "}
+              Đăng ký ngay
+            </Button>
           </strong>
         </Form.Item>
         <Form.Item>

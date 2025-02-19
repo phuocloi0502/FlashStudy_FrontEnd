@@ -1,5 +1,24 @@
 @use "../../styles/color" as *;
 .vocabulary-list-wrap {
+  position: relative;
+  .vocabulary-list-title {
+    span {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    strong {
+      color: $text-color;
+      font-size: 1.2rem;
+      font-weight: 500;
+      > span {
+        color: rgb(4, 88, 245);
+        font-size: 1.3rem;
+      }
+    }
+    .trainning-button {
+      margin: 20px;
+    }
+  }
   .vocabulary-list-content-wrap {
     margin-top: 20px;
     display: flex;
@@ -28,12 +47,12 @@
 }
 .play-icon {
   color: rgb(66, 130, 249);
-  background-color: rgba(221, 213, 213, 0.534);
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   font-size: 20px;
   &:hover {
@@ -70,10 +89,11 @@
   }
 }
 @media (max-width: 768px) {
+  .play-icon {
+    width: 20px;
+    height: 20px;
+  }
   .vocabulary-list-title {
-    h3 {
-      font-size: 0.9rem !important;
-    }
   }
   .vocabulary-list-content-wrap {
     //margin-top: 20px;
@@ -82,15 +102,19 @@
     gap: 10px !important;
   }
   .vocabulary-item .kanji-area {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .vocabulary-item .furigana-area {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   .vocabulary-item .mean-area {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   .vocabulary-item .example-mean-area {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+  }
+  .vocabulary-item .example-area {
+    font-weight: 500;
+    font-size: 0.7rem;
   }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { Button, Card, Flex, Radio, Modal, Row, Col, Spin } from "antd";
+import { Button, Card, Flex, Radio, Modal, Row, Col, Spin, Tour } from "antd";
 import { IoMdSettings } from "react-icons/io";
 import "./training.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,8 +13,10 @@ import {
   fetchDataOnce,
   getDataForStatusIsTrue,
   getFilteredVocabulary,
+  getIsTheFirst,
   getRealTimeData,
   setData,
+  setIsTheFirst,
   shuffleArray,
 } from "../../services/fetchData";
 export const Training = () => {
@@ -39,6 +41,8 @@ export const Training = () => {
   const chapter_number_text = chapterNumber.match(/\d+/)[0];
   const PATCH = `vocabulary_status/${UID}/lessonId_${lessonId}/vocabularyId_${vocabularyIdCurrent}`;
   const PATCH_GET_DATA = `vocabulary_status/${UID}/lessonId_${lessonId}`;
+  const PATCH_GET_DATA_IS_THE_FIRST = `is_the_first_status/${UID}`;
+
   const levelItem = {
     "JLPT-N1": "N1",
     "JLPT-N2": "N2",
@@ -72,10 +76,22 @@ export const Training = () => {
   const [loading, setLoading] = useState();
   const [countV, setCountV] = useState(1);
   const [refresh, setRefresh] = useState(true);
+  const [theFirst, setTheFirst] = useState(false);
+
   // get data from firebase
   useEffect(() => {
     setCurrentCardIndex(0);
     setLoading(true); // Bắt đầu tải dữ liệu
+    getIsTheFirst(PATCH_GET_DATA_IS_THE_FIRST)
+      .then((data) => {
+        //  console.log("the first: ", data?.isTheFirst);
+
+        setTheFirst(data?.isTheFirst);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false); // Xảy ra lỗi, dừng loading
+      });
     fetchDataOnce(PATCH_GET_DATA)
       .then((data) => {
         setDataFromFirebase(data);
@@ -139,10 +155,10 @@ export const Training = () => {
         setIsDragging(true);
         if (dragTimeoutRef.current) clearTimeout(dragTimeoutRef.current);
 
-        if (clampedX > 1) {
+        if (clampedX > 3) {
           setData(PATCH, lessonId, vocabularyIdCurrent, true);
           boxShadowColor = `0px 0px 100px rgba(0, 255, 0, 0.5)`; // Màu xanh lá
-        } else if (clampedX < 0) {
+        } else if (clampedX < -3) {
           setData(PATCH, lessonId, vocabularyIdCurrent, false);
           boxShadowColor = `0px 0px 100px rgba(255, 0, 0, 0.5)`; // Màu đỏ
         }
@@ -200,14 +216,89 @@ export const Training = () => {
     }
   }, [filteredDataForFlashCard]);
 
-  // xu lieu du lieu voi fire base
+  // huong dan
+  const [openTour, setOpenTour] = useState(true);
+  const cardRef = useRef(null);
+  const settingsRef = useRef(null);
+  const isStudiedRef = useRef(null);
+  const faceRef = useRef(null);
+  const showExampleRef = useRef(null);
+  const steps = [
+    {
+      // title: "Bước 1: Đăng nhập",
+      description: "Nếu từ này chưa thuộc thì kéo thẻ qua trái",
 
-  // Lấy dữ liệu thời gian thực
-  //console.log(countV);
-
+      target: () => cardRef.current,
+      nextButtonProps: { children: "Tiếp", type: "primary" },
+    },
+    {
+      // title: "Bước 1: Đăng nhập",
+      description: "Ngược lại nếu thuộc rồi thì kéo thẻ qua phải",
+      target: () => cardRef.current,
+      prevButtonProps: { children: "Trước" },
+      nextButtonProps: { children: "Tiếp", type: "primary" },
+    },
+    {
+      //  title: "Bước 3: Cài đặt",
+      description: "Bấm vào đây để chọn cách luyện tập.",
+      target: () => settingsRef.current,
+      prevButtonProps: { children: "Trước" },
+      nextButtonProps: {
+        children: "Tiếp",
+        type: "primary",
+        onClick: () => {
+          setIsModalOpen(true);
+        },
+      },
+    },
+    {
+      //  title: "Bước 3: Cài đặt",
+      description: "Chọn các từ thuộc hay chưa thuộc để ôn tập",
+      target: () => isStudiedRef.current,
+      prevButtonProps: { children: "Trước" },
+      nextButtonProps: { children: "Tiếp", type: "primary" },
+    },
+    {
+      //  title: "Bước 3: Cài đặt",
+      description: "Mặt trước hiển thị kanji hay nghĩa",
+      target: () => faceRef.current,
+      prevButtonProps: { children: "Trước" },
+      nextButtonProps: { children: "Tiếp", type: "primary" },
+    },
+    {
+      //  title: "Bước 3: Cài đặt",
+      description: "Có hiển thị ví dụ không",
+      target: () => showExampleRef.current,
+      prevButtonProps: { children: "Trước" },
+      nextButtonProps: {
+        children: "Hoàn tất",
+        onClick: () => {
+          setIsModalOpen(false);
+          setOpenTour(false);
+          setIsTheFirst(PATCH_GET_DATA_IS_THE_FIRST, false);
+        },
+      },
+    },
+  ];
+  const handleOnCloseTour = () => {
+    setIsModalOpen(false);
+    setOpenTour(false);
+    setIsTheFirst(PATCH_GET_DATA_IS_THE_FIRST, false);
+  };
   return (
     <div className="training-wrap">
       <Spin spinning={loading} fullscreen={true} />
+      {theFirst ? (
+        <Tour
+          open={openTour}
+          onClose={handleOnCloseTour}
+          steps={steps}
+          gap={20}
+        />
+      ) : (
+        <></>
+      )}
+
       <div className="training-title content-title">
         <h3>
           Flash Card {level}
@@ -219,7 +310,7 @@ export const Training = () => {
       <div className="training-content-wrap">
         <div className="training-content-header">
           <div className="option-area">
-            <div className="show-model-button">
+            <div className="show-model-button" ref={settingsRef}>
               <Button onClick={showModal} icon={<IoMdSettings />}>
                 Cài đặt
               </Button>
@@ -232,7 +323,7 @@ export const Training = () => {
               okText="Lưu"
               cancelText="Hủy"
             >
-              <Row justify={"center"}>
+              <Row justify={"center"} ref={isStudiedRef}>
                 <Col span={7}>
                   {" "}
                   <span>Hiển thị: </span>
@@ -251,7 +342,7 @@ export const Training = () => {
                   </Radio.Group>
                 </Col>
               </Row>
-              <Row justify={"center"}>
+              <Row justify={"center"} ref={faceRef}>
                 <Col span={7}>
                   {" "}
                   <span>Mặt trước: </span>
@@ -266,7 +357,7 @@ export const Training = () => {
                   </Radio.Group>
                 </Col>
               </Row>
-              <Row justify={"center"}>
+              <Row justify={"center"} ref={showExampleRef}>
                 <Col span={7}>
                   <span>Ví dụ: </span>
                 </Col>
@@ -299,7 +390,7 @@ export const Training = () => {
               </span>
             </div>
           </div>
-          <div className="flash-card-area">
+          <div className="flash-card-area" ref={cardRef}>
             {filteredDataForFlashCard?.length == 0 ? (
               <>
                 <h2>Không có từ vựng</h2>

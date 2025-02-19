@@ -32,24 +32,29 @@ export const Header = (props) => {
       icon: <FaHome />,
     },
     {
-      key: "tu-vung",
-      label: "Từ vựng",
+      key: "tu-vung/JLPT-N1",
+      label: "N1",
       icon: <TbVocabulary />,
     },
     {
-      key: "ngu-phap",
-      label: "Ngữ pháp",
-      icon: <FaBook />,
+      key: "tu-vung/JLPT-N2",
+      label: "N2",
+      icon: <TbVocabulary />,
     },
     {
-      key: "kanji",
-      label: "Kanji",
-      icon: <AiTwotoneInsurance />,
+      key: "tu-vung/JLPT-N3",
+      label: "N3",
+      icon: <TbVocabulary />,
     },
     {
-      key: "blog",
-      label: "Blog",
-      icon: <FaBlog />,
+      key: "tu-vung/JLPT-N4",
+      label: "N4",
+      icon: <TbVocabulary />,
+    },
+    {
+      key: "tu-vung/JLPT-N5",
+      label: "N5",
+      icon: <TbVocabulary />,
     },
     {
       key: "account",
@@ -112,18 +117,19 @@ export const Header = (props) => {
           </Link>
         </div>
         <div className="menu-item">
-          <Link to={"/tu-vung"}>Từ Vựng</Link>
+          <Link to={"/tu-vung/JLPT-N1"}>N1</Link>
         </div>
         <div className="menu-item">
-          <Link to={"/ngu-phap"}>Ngữ Pháp</Link>
+          <Link to={"/tu-vung/JLPT-N2"}>N2</Link>
         </div>
         <div className="menu-item">
-          {" "}
-          <Link to={"/kanji"}>Kanji</Link>
+          <Link to={"/tu-vung/JLPT-N3"}>N3</Link>
         </div>
         <div className="menu-item">
-          {" "}
-          <Link to={"/blog"}>Blog</Link>
+          <Link to={"/tu-vung/JLPT-N4"}>N4</Link>
+        </div>
+        <div className="menu-item">
+          <Link to={"/tu-vung/JLPT-N5"}>N5</Link>
         </div>
         <div className="menu-item">
           <Link to={"/account"}>

@@ -13,6 +13,23 @@
   margin: 30px 0;
   border-radius: 20px;
 }
+.play-icon-card {
+  color: rgb(66, 130, 249);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    border: 1px solid rgb(66, 130, 249);
+  }
+}
 .flash-card {
   width: 350px;
   height: 500px;
@@ -88,7 +105,6 @@
   .flash-card {
     width: 260px;
     height: 390px;
-    margin-bottom: 50px;
   }
   .flash-card-front h3 {
     font-size: 2.1rem;

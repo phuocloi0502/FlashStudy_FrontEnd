@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./signUp.scss";
 import "../login/login.scss";
-import { Form, Input, Button, Flex, message } from "antd";
+import { Form, Input, Button, Flex, message, Spin } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineMailOutline, MdLockOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { setIsTheFirst } from "../../services/fetchData";
 export const SignUp = (props) => {
   const nav = useNavigate();
   // init
@@ -14,6 +15,8 @@ export const SignUp = (props) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   // handle
+  //const PATCH = `is_the_first_status/${UID}`;
+  //const PATCH_GET_DATA = `is_the_first_status/${UID}`;
   const handleSignUp = async (value) => {
     setLoading(true);
     try {
@@ -22,7 +25,10 @@ export const SignUp = (props) => {
         value.email,
         value.password
       );
-      // dispatch(setShowSignUpForm(false));
+      const user = userCredential.user;
+      //  console.log("User ID (UID):", user.uid);
+      setIsTheFirst(`is_the_first_status/${user.uid}`, true);
+
       form.resetFields();
       message.success("Đăng ký thành công !");
       nav("/login");
@@ -39,6 +45,7 @@ export const SignUp = (props) => {
   };
   return (
     <div className="login-form-wrap">
+      <Spin spinning={loading} fullscreen={true} />
       <Form
         name="loginForm"
         onFinish={handleSignUp}

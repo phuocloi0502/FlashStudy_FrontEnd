@@ -19,12 +19,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     .bg-img-content {
       width: 100%;
       height: 100%;
       background-color: white;
       border-radius: 15px;
-      //padding: 3%;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -46,19 +47,23 @@
   }
 }
 .n1-color {
-  background-color: $main_blue;
+  background: radial-gradient(circle, #adddf8 30%, $main_blue 100%);
 }
 .n2-color {
-  background-color: #ef5038;
+  // background-color: #ef5038;
+  background: radial-gradient(circle, #eb9a9a 30%, #ef5038 100%);
 }
 .n3-color {
-  background-color: #9aca3b;
+  // background-color: #9aca3b;
+  background: radial-gradient(circle, #b3d07a 30%, #9aca3b 100%);
 }
 .n4-color {
-  background-color: #8880bc;
+  //background-color: #8880bc;
+  background: radial-gradient(circle, #9d97c2 30%, #8880bc 100%);
 }
 .n5-color {
-  background-color: #fedc00;
+  // background-color: #fedc00;
+  background: radial-gradient(circle, #e7dea1 30%, #fedc00 100%);
 }
 
 .vocabulary-color {

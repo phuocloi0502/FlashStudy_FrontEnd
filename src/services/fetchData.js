@@ -13,7 +13,17 @@ export const setData = async (path, lessonId, vocabularyId, status) => {
     console.log("Loi ghi du lieu: ", error);
   }
 };
-export const fetchDataOnce = async (path) => {
+export const setIsTheFirst = async (path, isTheFirst) => {
+  const data = {
+    isTheFirst: isTheFirst,
+  };
+  try {
+    await set(ref(database, path), data);
+  } catch (error) {
+    console.log("Loi ghi du lieu: ", error);
+  }
+};
+export const getIsTheFirst = async (path) => {
   const db = getDatabase();
   const dataRef = ref(db, path);
 
@@ -23,6 +33,23 @@ export const fetchDataOnce = async (path) => {
       return snapshot.val(); // Trả về dữ liệu từ Firebase
     } else {
       console.log("No data available");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+};
+export const fetchDataOnce = async (path) => {
+  const db = getDatabase();
+  const dataRef = ref(db, path);
+
+  try {
+    const snapshot = await get(dataRef);
+    if (snapshot.exists()) {
+      return snapshot.val(); // Trả về dữ liệu từ Firebase
+    } else {
+      // console.log("No data available");
       return null;
     }
   } catch (error) {

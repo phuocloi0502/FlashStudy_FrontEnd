@@ -1,16 +1,21 @@
 .container {
   position: relative;
+  height: 100%;
   .header-wrap {
   }
   .content-wrap {
-    position: relative;
-    top: 70px;
-    padding: 20px 30px;
+    padding: 80px 30px;
+    height: 100%;
+  }
+  .footer-wrap {
+    width: 100%;
+    // position: absolute;
+    // bottom: 0;
+    // padding: 20px 30px;
   }
 }
 @media (max-width: 768px) {
   .container .content-wrap {
-    top: 60px !important;
-    padding: 10px !important;
+    padding: 80px 10px !important;
   }
 }

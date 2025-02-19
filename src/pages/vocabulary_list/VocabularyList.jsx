@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./vocabulary_list.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Space, Table, Button, Spin } from "antd";
+import { Space, Table, Button, Spin, Flex } from "antd";
 import { IoPlayCircleOutline, IoPauseCircleOutline } from "react-icons/io5";
 import { changeLessonIdCurrent } from "../../redux/slide/LessonSlide";
 import useSelection from "antd/es/table/hooks/useSelection";
@@ -98,7 +98,7 @@ export const VocabularyList = (props) => {
       title: "#",
       dataIndex: "key",
       key: "id",
-      responsive: ["lg"],
+      // responsive: ["lg"],
       render: (text, record, index) => {
         return (
           <div className="table-index-wrap">
@@ -136,8 +136,8 @@ export const VocabularyList = (props) => {
       key: "example",
 
       render: (text, record, index) => {
-        if (typeof text !== "string") {
-          return <div>Không có ví dụ hợp lệ</div>;
+        if (text == "Không có ví dụ") {
+          return <div></div>;
         }
 
         const rubyText = convertToRuby(
@@ -164,26 +164,32 @@ export const VocabularyList = (props) => {
   return (
     <div className="vocabulary-list-wrap">
       <Spin spinning={loading} fullscreen={true} />
-      <div className="vocabulary-list-title content-title">
-        <h3>
-          Từ vựng {level} <br /> Chủ đề{" "}
-          <span>{listVocabulary?.[0]?.lesson}</span>
-        </h3>
-        <br />
-        <Button
-          type="primary"
-          onClick={() => {
-            nav(
-              `/tu-vung/${level}/chapter-${chapter_number_text}/lesson-${sessionNumber_text}/luyen-tap`,
-              {
-                state: { lesson_id: lessonId },
-              }
-            );
-          }}
-        >
-          {" "}
-          Luyện tập với Flash Card
-        </Button>
+      <div className="vocabulary-list-title ">
+        <Flex vertical gap={10} align="center">
+          <span>Từ vựng {level}</span>
+
+          <strong>
+            Chapter {chapter_number_text} - Bài {sessionNumber_text}:{" "}
+            <span>{listVocabulary?.[0]?.lesson}</span>
+          </strong>
+        </Flex>
+        <Flex align="center" justify="center" className="trainning-button">
+          <Button
+            type="primary"
+            onClick={() => {
+              nav(
+                `/tu-vung/${level}/chapter-${chapter_number_text}/lesson-${sessionNumber_text}/luyen-tap`,
+                {
+                  state: { lesson_id: lessonId },
+                }
+              );
+            }}
+            danger
+          >
+            {" "}
+            Luyện tập với Flash Card
+          </Button>
+        </Flex>
       </div>
       <div className="vocabulary-list-content-wrap">
         <div className="vocabulary-list">

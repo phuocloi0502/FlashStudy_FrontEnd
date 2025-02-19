@@ -1,6 +1,6 @@
 .login-form-wrap {
   display: flex;
-  height: 70vh;
+  height: calc(100vh - 150px);
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -30,5 +30,6 @@
   .login-form-wrap {
     justify-content: start;
     margin-top: 50px;
+    height: calc(100vh - 200px);
   }
 }
