@@ -155,10 +155,10 @@ export const Training = () => {
         setIsDragging(true);
         if (dragTimeoutRef.current) clearTimeout(dragTimeoutRef.current);
 
-        if (clampedX > 3) {
+        if (clampedX > 5) {
           setData(PATCH, lessonId, vocabularyIdCurrent, true);
           boxShadowColor = `0px 0px 100px rgba(0, 255, 0, 0.5)`; // Màu xanh lá
-        } else if (clampedX < -3) {
+        } else if (clampedX < -5) {
           setData(PATCH, lessonId, vocabularyIdCurrent, false);
           boxShadowColor = `0px 0px 100px rgba(255, 0, 0, 0.5)`; // Màu đỏ
         }
